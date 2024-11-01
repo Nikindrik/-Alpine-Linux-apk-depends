@@ -16,9 +16,9 @@ def get_depends(url: str):
             depends_links = [a.text.strip() for a in depends_details.select('ul.pure-menu-list a')]
             return depends_links
         else:
-            return -1 # Ошибка доступа
+            return -1  # Ошибка доступа
     except requests.RequestException as e:
-        return -2 # Если ошибка по url
+        return -2  # Если ошибка по url
 
 
 def create_graph(package_str, depends_lst):
@@ -26,7 +26,7 @@ def create_graph(package_str, depends_lst):
     dot.node(package_str, package_str)
     for dep in depends_lst:
         dot.node(dep, dep)
-        dot.edge(package_str, dep)
+        dot.edge(dep, package_str)
     dot.format = 'png'
     output_path = dot.render('dependency_graph')
     return output_path
