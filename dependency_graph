@@ -1,8 +1,0 @@
-// Dependency Graph
-digraph {
-	"busybox-extras-openrc" [label="busybox-extras-openrc"]
-	openrc [label=openrc]
-	openrc -> "busybox-extras-openrc"
-	"busybox-extras" [label="busybox-extras"]
-	"busybox-extras" -> "busybox-extras-openrc"
-}
