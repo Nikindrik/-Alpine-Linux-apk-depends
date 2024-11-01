@@ -84,6 +84,7 @@ def main():
                 print(f'Граф создан по пути {path_picture}.')
             exit()
     print(f"В репозиториях main, community, testing нет пакета {args.package_name}.")
+    # Я знаю что такое delete
 
 if __name__ == "__main__":
     main()
