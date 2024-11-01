@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import argparse
 import graphviz
 
+
 def get_depends(url: str):
     try:
         response = requests.get(url)
@@ -11,7 +12,7 @@ def get_depends(url: str):
         depends_section = soup.find('summary', string=lambda text: text and "Depends" in text)
         if depends_section: # Если depens существует
             depends_details = depends_section.find_parent('details')
-            # Извлекаем текст всех тегов <a> внутри списка <ul>
+            # Извлекает текст всех тегов <a> внутри списка <ul>
             depends_links = [a.text.strip() for a in depends_details.select('ul.pure-menu-list a')]
             return depends_links
         else:
@@ -21,20 +22,14 @@ def get_depends(url: str):
 
 
 def create_graph(package_str, depends_lst):
-    dot = graphviz.Digraph(comment="Dependency Graph", format='jpg')
+    dot = graphviz.Digraph(comment='Dependency Graph')
     dot.node(package_str, package_str)
-    if False: # depends_lst == -1:
-        print(f"Ошибка: не удалось получить зависимости для {package_str}.")
-    # elif depends_lst == -2:
-        print("Ошибка подключения. Проверьте URL репозитория.")
-    else:
-        for dependency in depends_lst:
-            dot.node(str(dependency), str(dependency))  # Создание узел для зависимости
-            dot.edge(str(package_str), str(dependency))  # Создание связи от пакета к зависимости
-
-    # Сохранение и рендеринг графика
-    dot.render(f'{package_str}_dependencies', view=True)
-    print(f"Граф зависимостей для {package_str} создан.")
+    for dep in depends_lst:
+        dot.node(dep, dep)
+        dot.edge(package_str, dep)
+    dot.format = 'png'
+    output_path = dot.render('dependency_graph')
+    return output_path
 
 def main():
     # TODO: Сделать поддержку --key для аргументов и добавить аргумент для программы визуализации графа
@@ -46,13 +41,17 @@ def main():
     full_url = f"{args.repo_url}/package/edge/main/x86_64/{args.package_name}"
     # Я знаю что такое delete
     depends_lst = get_depends(full_url)
-    package_str = str(args.package_name)
-    print(depends_lst)
-    create_graph(package_str, depends_lst)  # Построение графа зависимостей
+    if depends_lst == -1:
+        print(f"Ошибка: не удалось получить зависимости для {args.package_name}.")
+    elif depends_lst == -2:
+        print("Ошибка. Проверьте URL репозитория.")
+    else:
+        print(depends_lst)
+        package_str = str(args.package_name)
+        print(package_str)
+        path_picture = create_graph(package_str, depends_lst)
+        print(f'Граф создан по пути {path_picture}.')
 
 
 if __name__ == "__main__":
     main()
-    # https://pkgs.alpinelinux.org/packages
-    # https://pkgs.alpinelinux.org/package/edge/main/x86_64/busybox-binsh
-    # busybox-binsh
