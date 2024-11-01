@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import argparse
-
+import graphviz
 
 def get_depends(url: str):
     try:
@@ -20,6 +20,22 @@ def get_depends(url: str):
         return -2 # Если ошибка по url
 
 
+def create_graph(package_str, depends_lst):
+    dot = graphviz.Digraph(comment="Dependency Graph", format='jpg')
+    dot.node(package_str, package_str)
+    if False: # depends_lst == -1:
+        print(f"Ошибка: не удалось получить зависимости для {package_str}.")
+    # elif depends_lst == -2:
+        print("Ошибка подключения. Проверьте URL репозитория.")
+    else:
+        for dependency in depends_lst:
+            dot.node(str(dependency), str(dependency))  # Создание узел для зависимости
+            dot.edge(str(package_str), str(dependency))  # Создание связи от пакета к зависимости
+
+    # Сохранение и рендеринг графика
+    dot.render(f'{package_str}_dependencies', view=True)
+    print(f"Граф зависимостей для {package_str} создан.")
+
 def main():
     # TODO: Сделать поддержку --key для аргументов и добавить аргумент для программы визуализации графа
     parser = argparse.ArgumentParser(description="Dependency graph visualizer for Alpine Linux packages.")
@@ -30,7 +46,9 @@ def main():
     full_url = f"{args.repo_url}/package/edge/main/x86_64/{args.package_name}"
     # Я знаю что такое delete
     depends_lst = get_depends(full_url)
+    package_str = str(args.package_name)
     print(depends_lst)
+    create_graph(package_str, depends_lst)  # Построение графа зависимостей
 
 
 if __name__ == "__main__":

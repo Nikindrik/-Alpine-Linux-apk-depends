@@ -21,9 +21,9 @@ pip3 install bs4
 ```
 Run
 ```commandline
-python main.py --user <user_name> --archive <archive_name.zip> --script <start_script_name.sh>
+python main.py <package_name> <repo_url>
 ```
 Example 
 ```editorconfig
-python main.py --user nick --archive systeam.zip --script start.sh
+python main.py busybox-extras-openrc "https://pkgs.alpinelinux.org"
 ```
