@@ -12,18 +12,20 @@ For windows
 .\venv\Scripts\activate
 pip3 install requests
 pip3 install bs4
+pip3 install graphviz
 ```
 For linux/UNIX/MAC
 ```commandline
 source venv/bin/activate
 pip3 install requests
 pip3 install bs4
+pip3 install graphviz
 ```
 Run
 ```commandline
-python main.py <package_name> <repo_url>
+python main.py <graph_tool_path> <package_name> <repo_url>
 ```
 Example 
 ```editorconfig
-python main.py busybox-extras-openrc "https://pkgs.alpinelinux.org"
+python main.py "venv\Lib\site-packages" intel-media-driver "https://pkgs.alpinelinux.org"
 ```
