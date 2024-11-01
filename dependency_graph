@@ -2,7 +2,7 @@
 digraph {
 	"busybox-extras-openrc" [label="busybox-extras-openrc"]
 	openrc [label=openrc]
-	"busybox-extras-openrc" -> openrc
+	openrc -> "busybox-extras-openrc"
 	"busybox-extras" [label="busybox-extras"]
-	"busybox-extras-openrc" -> "busybox-extras"
+	"busybox-extras" -> "busybox-extras-openrc"
 }

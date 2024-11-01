@@ -22,12 +22,12 @@ def get_depends(url: str):
 
 
 def create_graph(package_str, depends_lst):
-    dot = graphviz.Digraph(comment='Dependency Graph')
+    dot = graphviz.Digraph(comment='Dependency Graph', format='png')
     dot.node(package_str, package_str)
     for dep in depends_lst:
         dot.node(dep, dep)
         dot.edge(dep, package_str)
-    dot.format = 'png'
+    # dot.format = 'png'
     output_path = dot.render('dependency_graph')
     return output_path
 
