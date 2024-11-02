@@ -1,0 +1,8 @@
+// Dependency Graph
+digraph {
+	"intel-media-driver" [label="intel-media-driver"]
+	"so_libc_musl_x86_64.so.1" [label="so_libc_musl_x86_64.so.1"]
+	"so_libc_musl_x86_64.so.1" -> "intel-media-driver"
+	"so_libgcc_s.so.1" [label="so_libgcc_s.so.1"]
+	"so_libgcc_s.so.1" -> "intel-media-driver"
+}

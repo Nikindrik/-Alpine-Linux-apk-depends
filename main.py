@@ -53,7 +53,8 @@ def create_graph(package_str, depends_lst, graph_tool_path, output_dir):
         dep_sanitized = dep.replace(":", "_")  # Потому что graphviz такой крутой и не видет :
         dot.node(dep_sanitized, dep_sanitized)
         dot.edge(dep_sanitized, package_str)
-    output_path = dot.render(filename='dependency_graph')
+        fname = 'dependency_for_' + package_str
+    output_path = dot.render(filename=fname)
     return output_path
 
 def main():
@@ -76,6 +77,8 @@ def main():
                 print(f"Ошибка: не удалось получить зависимости для {args.package_name}.")
             elif depends_lst == -2:
                 print("Ошибка. Проверьте URL репозитория.")
+            elif depends_lst[0] == 'None':
+                print(f"Нет зависимости для {args.package_name}.")
             else:
                 print(depends_lst)
                 package_str = str(args.package_name)
@@ -83,8 +86,13 @@ def main():
                 path_picture = create_graph(package_str, depends_lst, args.graph_tool_path, output_dir)
                 print(f'Граф создан по пути {path_picture}.')
             exit()
-    print(f"В репозиториях main, community, testing нет пакета {args.package_name}.")
+    for elem in full_urls:
+        if check_url_exists(elem) == True:
+            print(f"В репозиториях main, community, testing нет пакета {args.package_name}.")
+            exit()
+    print(f"Ошибка в URL {args.repo_url}.")
     # Я знаю что такое delete
+
 
 if __name__ == "__main__":
     main()
