@@ -1,0 +1,8 @@
+// Dependency Graph
+digraph {
+	rbspy [label=rbspy]
+	"so_libc.musl-x86_64.so.1" [label="so_libc.musl-x86_64.so.1"]
+	"so_libc.musl-x86_64.so.1" -> rbspy
+	"so_libgcc_s.so.1" [label="so_libgcc_s.so.1"]
+	"so_libgcc_s.so.1" -> rbspy
+}
