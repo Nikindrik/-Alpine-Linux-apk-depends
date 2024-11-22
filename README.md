@@ -1,5 +1,5 @@
 <h1 align="center"> Alpine Linux apk depends  </h1>
-Some info
+This is a command line tool for visualizing dependency graph. Dependencies are identified by the Alpine Linux OS package name (apk). Graphviz representation is used to describe the dependency graph. The visualizer outputs the result as a graphical representation of the graph.
 
 # 📘 Installation and running
 
@@ -23,25 +23,21 @@ pip3 install graphviz
 ```
 Run
 ```commandline
-python main.py <graph_tool_path> <package_name> <repo_url>
+python main.py <graph_tool_path> <package_name> <repo_url>   
 ```
 Example 
 ```editorconfig
 python main.py "venv\Lib\site-packages" intel-media-driver "https://pkgs.alpinelinux.org"
 ```
 
-# 💻 Command in UNIX emulation
+# 💻 The command line switches are set:
 
-* **Displays available commands and their brief descriptions** - `help`
-* **Lists directories and files in the current working directory** - `ls`
-* **Changes the current directory in the virtual filesystem** - `cd`
-* **Exits the emulator or application** - `exit`
-* **Counts words, lines, or characters in a file** - `wc`
-* **Moves or renames files or directories** - `mv`
-* **Clears the console output screen** - `clear`
+* **Path to graph visualization program.**
+* **The name of the packet being analyzed.**
+* **Repository URL.**
 
-# 🖼️ Gallery
+# 🖼️ Results Gallery
 
-![img.png](source/img/img.png)
+![img.png](source/img/img_1.png)
 
 ![img.png](source/img/img_2.png)

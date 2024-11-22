@@ -1,8 +1,14 @@
 // Dependency Graph
 digraph {
 	"intel-media-driver" [label="intel-media-driver"]
-	"so_libc_musl_x86_64.so.1" [label="so_libc_musl_x86_64.so.1"]
-	"so_libc_musl_x86_64.so.1" -> "intel-media-driver"
+	"so_libc.musl-x86_64.so.1" [label="so_libc.musl-x86_64.so.1"]
+	"so_libc.musl-x86_64.so.1" -> "intel-media-driver"
 	"so_libgcc_s.so.1" [label="so_libgcc_s.so.1"]
 	"so_libgcc_s.so.1" -> "intel-media-driver"
+	"so_libigdgmm.so.12" [label="so_libigdgmm.so.12"]
+	"so_libigdgmm.so.12" -> "intel-media-driver"
+	"so_libstdc++.so.6" [label="so_libstdc++.so.6"]
+	"so_libstdc++.so.6" -> "intel-media-driver"
+	"so_libva.so.2" [label="so_libva.so.2"]
+	"so_libva.so.2" -> "intel-media-driver"
 }
